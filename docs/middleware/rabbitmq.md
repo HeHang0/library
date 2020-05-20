@@ -1,5 +1,9 @@
 # rabbitmq
 
+## rabbitmq与kafka的区别
+kafka更适合大数据环境下的消息队列，rabbitmq最初是用于金融行业的消息队列；所以kafka的吞吐量更大，但可靠性、可用性等方面比rabbitmq差；
+所以，kafka更适用于吞吐量高的日志系统或者活跃的流式数据，大数据量的数据处理上；rabbitmq则是稳定性、可靠性、安全性、实时性要求更高的环境下；
+
 ## 基本结构
 rabbitmq分为exchange交换机，routing key路由键，binding绑定，queue队列基本模块；生产者将mq发送到exchange中，然后根据情况进行binding，由routing key路由到对应的一个或多个queue中，消费者从对应的queue中取消息；
 

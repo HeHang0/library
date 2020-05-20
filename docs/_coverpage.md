@@ -1,6 +1,7 @@
 # 封面
 
-> 我要开始装逼了
+> 这是个封面
 
+<span hidden>[Slide To Get Start](#introduction)</span>
 
-[向下滑动](#introduction)
+[Click To Get Start](README)

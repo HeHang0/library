@@ -1,19 +1,19 @@
 <!-- docs/_sidebar.md -->
 
-* [**首页**](README "I will do my best")
+- [**首页**](README "I will do my best")
 
- <font size=2>中间件</font>
+- <font size=2>中间件</font>
 
-    * [rabbitmq](middleware/rabbitmq)
+    - [rabbitmq](middleware/rabbitmq)
 
- <font size=2>数据库</font>
+- <font size=2>数据库</font>
 
-    * [redis](databases/redis)
+    - [redis](databases/redis)
 
-    * [mysql](databases/mysql)
+    - [mysql](databases/mysql)
 
-    * [elasticsearch](databases/elasticsearch)
+    - [elasticsearch](databases/elasticsearch)
 
-* [**go**](golang/golang)
+- [**go**](golang/golang)
 
 
