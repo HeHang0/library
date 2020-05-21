@@ -1,3 +1,4 @@
 # rua~这是我的首页
 
-走过路过不要错过勒~
+[查看完整页面戳这~](https://shhch.github.io/library/#/README)
+

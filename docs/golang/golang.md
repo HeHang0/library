@@ -253,6 +253,12 @@ grpc是http2，http2默认并不加密，但是定义了会话层TLS，与https�
 
 ## beego
 
++ 环境变量配置
+
+    beego支持从环境变量中读取配置信息，配置方式为`key = ${env_name||default}`，获取时，使用beego.AppConfig.String("key")即可；
+
+    如果env_name环境变量不存在，则使用default，环境变量的优先级是高于默认值的，他们之间使用`||`分隔；
+
 + beego过滤器，类似gin中间件，但是没那么灵活
   
     ```golang
@@ -271,3 +277,34 @@ grpc是http2，http2默认并不加密，但是定义了会话层TLS，与https�
     + params 多个bool参数判断
         1. 第一个，是否允许如果有输出是否跳过其他filters，flase允许执行多个filter，默认true；
         2. 第二个，是否重置filters的参数，默认是false；因为在filters的pattern和本身的路由的pattern冲突的时候，可以把filters的参数重置
+
++ beego路由
+
+    + 自动路由<br>
+    在router的初始化init中添加`beego.AutoRouter(&admin.UserController{})`其中controller为需要自动路由的控制器，一次只能添加一个，需要多个则要多次调用；匹配规则为Controller前面的名+函数名、例如UserController下的login函数，路由为/user/login，路由为全小写；
+
+    + 固定路由<br>
+    使用`beego.Router("url",&Controller{},"post,get:functionName")`，第一个参数为路由的url，第二个参数为控制器，第三个参数分两部分，前半部分为请求方式，多个请求方式用`,`隔开，同时支持使用`*`来表示所有请求方式，后半部分为对应的函数名，前半部分与后半部分使用`:`分割；
+
+    + 正则路由<br>
+    固定路由是正则路由的全匹配类型，所以他们的使用方式相同`beego.Router("url",&Controller,"post,get:functionName")`；
+
+        示例：
+        + url:"/api/?:id"，可以匹配/api/***，同时可以通过c.Ctx.Input.Param(":id")获取对应的值（c为对应controller）
+        + url:"/api/:id"，与上面类似，但是/api/会失败
+        + url:"/api/:id([0-9]+)"，可匹配一个或多个数字
+        + TODO 正则后面再说...
+
+    + 注解路由<br>
+    通过beego.Include(&Controller{})来导入注解路由，一次可添加多个控制器；<br>
+    同时在对应controller的函数上方添加注解，例如：
+        ```golang
+        // @router /admin/index/
+        func (this *UserController) Index() {
+            this.Ctx.WriteString("这是注释路由 /admin/index")
+        }
+        ```
+    
+    + namespace
+
+
