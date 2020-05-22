@@ -148,7 +148,7 @@ epoll是个啥？
     3. 从队列中取出灰色对象，将其引用的对象标记为灰色，并放入队列中，自身标记为黑色；
     4. 重复3步骤，直到灰色队列为空，此时，白对象就是无引用的垃圾，对此进行回收；
 
-    ![三色标记](https://github.com/shhch/library/raw/master/docs/_media/IMG_0850.GIF)
+    ![三色标记](https://github.com/shhch/library/releases/download/1.0/IMG_0850.GIF)
 
 + go的gc历史：
     + <=1.3: 标记清除，stw；
