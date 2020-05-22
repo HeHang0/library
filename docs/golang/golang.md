@@ -206,7 +206,8 @@ grpc是http2，http2默认并不加密，但是定义了会话层TLS，与https�
 
 
 + metadata，可以理解为一次rpc调用中额外的参数，k-v格式，通过以下方式调用
-  
+
+    客户端
     ```golang
     // 客户端生成和发送md
     md := metadata.New(map[string]string{"hello": "world", "foo": "bar"})
@@ -214,10 +215,14 @@ grpc是http2，http2默认并不加密，但是定义了会话层TLS，与https�
     ctx := metadata.NewOutgoingContext(context.Background(), md)
     // 单向 RPC
     response, err := client.SomeRPC(ctx, someRequest)
+    ```
 
+    服务端
+    ```golang
     // 服务器接收md
     md, ok := metadata.FromIncomingContext(ctx)
     ```
+    
 
 ## gin
 
@@ -296,7 +301,7 @@ grpc是http2，http2默认并不加密，但是定义了会话层TLS，与https�
         + TODO 正则后面再说...
 
     + 注解路由<br>
-    通过beego.Include(&Controller{})来导入注解路由，一次可添加多个控制器；<br>
+    通过`beego.Include(&Controller{})`来导入注解路由，一次可添加多个控制器；<br>
     同时在对应controller的函数上方添加注解，例如：
         ```golang
         // @router /admin/index/
@@ -304,6 +309,8 @@ grpc是http2，http2默认并不加密，但是定义了会话层TLS，与https�
             this.Ctx.WriteString("这是注释路由 /admin/index")
         }
         ```
+
+        导入后，还需要重新自动生成对应的router文件，需要执行`bee run`，bee为beego客户端
     
     + namespace
 
