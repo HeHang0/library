@@ -149,7 +149,7 @@ epoll是个啥？
     4. 重复3步骤，直到灰色队列为空，此时，白对象就是无引用的垃圾，对此进行回收；
 
     <div>
-    <img src="../_media/IMG_0850.GIF">
+    <img src="_media/IMG_0850.GIF">
     </div>
 
 + go的gc历史：
