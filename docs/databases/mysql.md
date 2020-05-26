@@ -47,6 +47,12 @@ mysql的日志：错误日志、查询日志、慢查询日志、binlog、中继
 
 ## InnoDB的MVCC多版本控制原理与流程
 
+什么是MVCC？
+
+在高并发的场景中，要保证数据的正确性，一般进行加锁处理，而大量使用的锁带来了很差的性能，MVCC在大多数场景下，可以代替行级锁，降低锁所带来的性能开销；
+
+在InnoDB中，支持行级锁，而MyISAM只支持表锁，（Mysql的）InnoDB中默认的隔离级别是可重复度repeatable read，他要求同一时间不同事物之间不能相互影响，同时还能够并发处理，使用悲观锁肯定是无法实现的，repeatable read采用的就是乐观锁，而这个乐观锁的实现就是MVCC，MVCC主要使用场景为RR（repeatable read）和RC（read commit）两种隔离级别中；
+
 MVCC流程：
 1. 事务开启，获得一个事务版本号，有mysql分发，自增
 2. 获得一个read view
