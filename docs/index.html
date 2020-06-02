@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="description" content="Description">
-  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <!-- <link rel="stylesheet" href="//unpkg.com/docsify/lib/themes/vue.css"> -->
   <link rel="stylesheet" href="static/vue.css">
   <link rel="icon" href="_media/icon.svg">
 </head>
+
 <body>
   <div id="app"></div>
   <script>
@@ -30,27 +33,27 @@
 
     var config = {
       model: {
-          jsonPath: 'static/hijiki/assets/hijiki.model.json' // 加载模型的json路径
+        jsonPath: 'static/hijiki/assets/hijiki.model.json' // 加载模型的json路径
       },
       display: {
-          superSample: 1, // 超采样等级
-          width: 175, // canvas的宽度
-          height: 200, // canvas的高度
-          position: 'right', // 显示位置：左或右
-          hOffset: 0, // canvas水平偏移
-          vOffset: 0, // canvas垂直偏移
+        superSample: 1, // 超采样等级
+        width: 175, // canvas的宽度
+        height: 200, // canvas的高度
+        position: 'right', // 显示位置：左或右
+        hOffset: 0, // canvas水平偏移
+        vOffset: 0, // canvas垂直偏移
       },
       // name: {
       //   canvas: 'shhch_cat'
       // },
       mobile: {
-          show: true, // 是否在移动设备上显示
-          scale: 1, // 移动设备上的缩放
-          motion: true, // 移动设备是否开启重力感应
+        show: true, // 是否在移动设备上显示
+        scale: 1, // 移动设备上的缩放
+        motion: true, // 移动设备是否开启重力感应
       },
       react: {
-          opacityDefault: 1, // 默认透明度
-          opacityOnHover: 1 // 鼠标移上透明度
+        opacityDefault: 1, // 默认透明度
+        opacityOnHover: 1 // 鼠标移上透明度
       }
     }
     window.onload = function () {
@@ -58,9 +61,15 @@
       move()
     }
 
-    function move(){
+    function move() {
+      var catMoveInterval = setInterval(function () {
         var dv = document.getElementById('live2d-widget');
         var catdv = document.getElementById('live2dcanvas');
+        if (dv == null || catdv == null) {
+          return
+        } else {
+          clearInterval(catMoveInterval)
+        }
         catdv.style.position = "relative";
         dv.style.position = "absolute";
         dv.style.width = "175px";
@@ -73,40 +82,41 @@
         var t = 0;
         var isDown = false;
         //鼠标按下事件
-        dv.onmousedown = function(e) {
-            //获取x坐标和y坐标
-            x = e.clientX;
-            y = e.clientY;
+        dv.onmousedown = function (e) {
+          //获取x坐标和y坐标
+          x = e.clientX;
+          y = e.clientY;
 
-            //获取左部和顶部的偏移量
-            l = dv.offsetLeft;
-            t = dv.offsetTop;
-            //开关打开
-            isDown = true;
-            //设置样式
-            dv.style.cursor = 'move';
+          //获取左部和顶部的偏移量
+          l = dv.offsetLeft;
+          t = dv.offsetTop;
+          //开关打开
+          isDown = true;
+          //设置样式
+          dv.style.cursor = 'move';
         }
         //鼠标移动
-        window.onmousemove = function(e) {
-            if (isDown == false) {
-                return;
-            }
-            //获取x和y
-            var nx = e.clientX;
-            var ny = e.clientY;
-            //计算移动后的左偏移量和顶部的偏移量
-            var nl = nx - (x - l);
-            var nt = ny - (y - t);
+        window.onmousemove = function (e) {
+          if (isDown == false) {
+            return;
+          }
+          //获取x和y
+          var nx = e.clientX;
+          var ny = e.clientY;
+          //计算移动后的左偏移量和顶部的偏移量
+          var nl = nx - (x - l);
+          var nt = ny - (y - t);
 
-            dv.style.left = nl + 'px';
-            dv.style.top = nt + 'px';
+          dv.style.left = nl + 'px';
+          dv.style.top = nt + 'px';
         }
         //鼠标抬起事件
-        dv.onmouseup = function() {
-            //开关关闭
-            isDown = false;
-            dv.style.cursor = 'default';
+        dv.onmouseup = function () {
+          //开关关闭
+          isDown = false;
+          dv.style.cursor = 'default';
         }
+      }, 1000)
     }
 
   </script>
@@ -115,4 +125,5 @@
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
   <script src="static/l2dwidget.min.js"></script>
 </body>
+
 </html>
